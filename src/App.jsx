@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import words from "./words.json";
 import Game from "./components/Game";
+import GameOver from "./components/GameOver";
+import GameStart from "./components/GameStart";
 
 const gameMode = {
   start: "start",
@@ -10,25 +12,41 @@ const gameMode = {
 
 function App() {
   const [currentGameMode, setGameMode] = useState(gameMode.start);
+  const [highScore, setHighScore] = useState(0);
+  const [lastScore, setLastScore] = useState(-1);
 
-  const renderStart = () => (
-    <section>
-      <button onClick={() => setGameMode(gameMode.active)}>Start Game!</button>
-    </section>
-  );
+  //TODO: useRef to get high score from localStorage
 
-  const renderActive = () => (
-    <Game words={words} setGameOver={() => setGameMode(gameMode.end)} />
-  );
+  const handleGameOver = (score) => {
+    if (score > highScore) {
+      setHighScore(score);
+    }
+    setLastScore(score);
+    setGameMode(gameMode.end);
+  };
 
-  const renderEnd = () => (
-    <section>
-      <button onClick={() => setGameMode(gameMode.active)}>Play Again!</button>
-      <button onClick={() => setGameMode(gameMode.start)}>
-        Go to homepage
-      </button>
-    </section>
-  );
+  const renderStart = () => {
+    return <GameStart handleStart={() => setGameMode(gameMode.active)} />;
+  };
+
+  const renderActive = () => {
+    return (
+      <Game words={words} setGameOver={(score) => handleGameOver(score)} />
+    );
+  };
+
+  const renderGameOver = () => {
+    console.log(`renderGameOver highScore = ${highScore}`);
+    return (
+      <GameOver
+        score={lastScore}
+        highScore={highScore}
+        maxScore={words.length}
+        restart={() => setGameMode(gameMode.active)}
+        goHome={() => setGameMode(gameMode.start)}
+      />
+    );
+  };
 
   const getGameRender = () => {
     switch (currentGameMode) {
@@ -37,7 +55,7 @@ function App() {
       case gameMode.active:
         return renderActive();
       case gameMode.end:
-        return renderEnd();
+        return renderGameOver();
       default:
         throw new Error(`Unhandled game state ${currentGameMode}`);
     }
