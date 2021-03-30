@@ -1,9 +1,10 @@
 import React from "react";
+import Button from "./Button";
 
 export default function GameStart({ handleStart }) {
   return (
     <section>
-      <button onClick={() => handleStart()}>Start Game!</button>
+      <Button onClick={() => handleStart()}>Start Game!</Button>
     </section>
   );
 }

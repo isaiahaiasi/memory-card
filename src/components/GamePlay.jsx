@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Button from "./Button";
 
 export default function GamePlay({ words, handleSelection }) {
   const getRandomWord = () =>
@@ -23,13 +24,12 @@ export default function GamePlay({ words, handleSelection }) {
   };
 
   return (
-    <div className="game-container">
+    <div className="game-play-container">
       <section className="word-selector">
-        <h1>Memory Card</h1>
         {Array.from(wordSet).map((word, i) => (
-          <button key={word + i} onClick={() => onClick(word)}>
+          <Button key={word + i} onClick={() => onClick(word)}>
             {word}
-          </button>
+          </Button>
         ))}
       </section>
     </div>

@@ -1,3 +1,4 @@
+import "../styles/game.css";
 import React, { useState } from "react";
 import words from "../words.json";
 import GamePlay from "./GamePlay";
@@ -78,5 +79,5 @@ export default function GameHandler() {
     }
   };
 
-  return <div className="App">{getGameRender()}</div>;
+  return <div className="game-container">{getGameRender()}</div>;
 }

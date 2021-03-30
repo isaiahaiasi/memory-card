@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "./Button";
 
 export default function EndView({
   clickedWords,
@@ -9,19 +10,19 @@ export default function EndView({
   goHome,
 }) {
   return (
-    <section className="game-over-container">
+    <section className="game-over">
       <p>
         {score}/{maxScore}
       </p>
       <p>Highscore: {highScore}</p>
       <p>You clicked on these words:</p>
-      <ol>
+      <ol className="game-over__word-list">
         {clickedWords.map((word) => (
           <li key={word}>{word}</li>
         ))}
       </ol>
-      <button onClick={restart}>Play Again?</button>
-      <button onClick={goHome}>Go to homepage</button>
+      <Button onClick={restart}>Play Again?</Button>
+      <Button onClick={goHome}>Go to homepage</Button>
     </section>
   );
 }
