@@ -9,8 +9,16 @@ export default function EndView({
   restart,
   goHome,
 }) {
+  const gameOverMsg =
+    score === maxScore
+      ? "Impressive! Wow! Good job!"
+      : score === highScore
+      ? "Congratulations! New high score!"
+      : "Aww, better luck next time! :)";
+
   return (
     <section className="game-over">
+      <p>{gameOverMsg}</p>
       <p>
         {score}/{maxScore}
       </p>
