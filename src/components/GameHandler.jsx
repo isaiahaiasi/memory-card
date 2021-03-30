@@ -9,8 +9,7 @@ const gameMode = {
   active: "active",
   end: "end",
 };
-//TODO: rebrand this as GameHandler, Game as GamePlay (or something)
-//TODO: rebrand "lastScore" as simply "score", pass to Game as prop w cb to increment
+
 export default function GameHandler() {
   const [currentGameMode, setGameMode] = useState(gameMode.start);
   const [highScore, setHighScore] = useState(0);
@@ -43,13 +42,14 @@ export default function GameHandler() {
   };
 
   const renderActive = () => {
+    // TODO: render ScoreBoard as well
     return <GamePlay words={words} handleSelection={handleSelection} />;
   };
 
   const renderGameOver = () => {
-    console.log(`renderGameOver highScore = ${highScore}`);
     return (
       <GameOver
+        clickedWords={clickedWords}
         score={getScore()}
         highScore={highScore}
         maxScore={words.length}

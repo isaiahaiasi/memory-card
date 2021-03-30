@@ -5,6 +5,7 @@ export default function GamePlay({ words, handleSelection }) {
     words[Number.parseInt(Math.random() * words.length)];
 
   const generateWordSet = () => {
+    // TODO: might want to account for case where there are no valid options
     const newWordSet = new Set();
     while (newWordSet.size < 4) {
       newWordSet.add(getRandomWord());
@@ -16,17 +17,19 @@ export default function GamePlay({ words, handleSelection }) {
   const [wordSet, setWordSet] = useState(generateWordSet()); // 4 random words
 
   const onClick = (word) => {
+    // TODO: add cooldown on click for transition & prevent accidental double-clicks
     handleSelection(word);
     setWordSet(generateWordSet());
-    // TODO: might want a tiny cooldown on click
   };
 
   return (
     <div className="game-container">
       <section className="word-selector">
         <h1>Memory Card</h1>
-        {Array.from(wordSet).map((word) => (
-          <button onClick={() => onClick(word)}>{word}</button>
+        {Array.from(wordSet).map((word, i) => (
+          <button key={word + i} onClick={() => onClick(word)}>
+            {word}
+          </button>
         ))}
       </section>
     </div>
