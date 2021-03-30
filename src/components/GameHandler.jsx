@@ -4,6 +4,7 @@ import words from "../words.json";
 import GamePlay from "./GamePlay";
 import GameOver from "./GameOver";
 import GameStart from "./GameStart";
+import ScoreBoard from "./ScoreBoard";
 
 const gameMode = {
   start: "start",
@@ -44,7 +45,16 @@ export default function GameHandler() {
 
   const renderActive = () => {
     // TODO: render ScoreBoard as well
-    return <GamePlay words={words} handleSelection={handleSelection} />;
+    return (
+      <div className="game-active">
+        <ScoreBoard
+          score={getScore()}
+          highScore={highScore}
+          maxScore={words.length}
+        />
+        <GamePlay words={words} handleSelection={handleSelection} />
+      </div>
+    );
   };
 
   const renderGameOver = () => {
