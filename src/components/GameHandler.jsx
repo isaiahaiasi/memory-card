@@ -1,5 +1,5 @@
 import "../styles/game.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import words from "../words.json";
 import GamePlay from "./GamePlay";
 import GameOver from "./GameOver";
@@ -14,13 +14,19 @@ const gameMode = {
 
 export default function GameHandler() {
   const [currentGameMode, setGameMode] = useState(gameMode.start);
-  const [highScore, setHighScore] = useState(0);
+  const [highScore, setHighScore] = useState(
+    localStorage.getItem("highScore") ?? 0
+  );
   const [clickedWords, setClickedWords] = useState([]);
 
   // this is the def of score, & I shouldn't have duplicate/derivable state
   const getScore = () => clickedWords.length;
 
-  //TODO: useRef to get high score from localStorage
+  // save highscore in localstorage
+  // (I think this is the right way to useEffect?)
+  useEffect(() => {
+    localStorage.setItem("highScore", highScore);
+  }, [highScore]);
 
   const handleGameOver = () => {
     if (getScore() > highScore) {
