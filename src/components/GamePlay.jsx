@@ -1,32 +1,41 @@
 import React, { useState } from "react";
 import Button from "./Button";
 
-export default function GamePlay({ words, handleSelection }) {
+export default function GamePlay({ words, clickedWords, handleSelection }) {
   const getRandomWord = () =>
     words[Number.parseInt(Math.random() * words.length)];
 
   const generateWordSet = () => {
-    // TODO: might want to account for case where there are no valid options
     const newWordSet = new Set();
     while (newWordSet.size < 4) {
       newWordSet.add(getRandomWord());
     }
 
-    return newWordSet;
+    // find an unclicked word
+    let unclickedWord;
+    do {
+      unclickedWord = getRandomWord();
+    } while (clickedWords.includes(unclickedWord));
+
+    // add the unclicked word at a random index
+    // (means one unnecessary getRandomWord(), but idc)
+    const newWordArray = Array.from(newWordSet);
+    newWordArray[Math.floor(Math.random() * 4)] = unclickedWord;
+    return newWordArray;
   };
 
-  const [wordSet, setWordSet] = useState(generateWordSet()); // 4 random words
+  const [wordsArray, setWordsArray] = useState(generateWordSet());
 
   const onClick = (word) => {
-    // TODO: add cooldown on click for transition & prevent accidental double-clicks
+    // TODO: add cooldown on click for transition & stop accidental double-clicks
     handleSelection(word);
-    setWordSet(generateWordSet());
+    setWordsArray(generateWordSet());
   };
 
   return (
     <div className="game-play-container">
       <section className="word-selector">
-        {Array.from(wordSet).map((word, i) => (
+        {wordsArray.map((word, i) => (
           <Button key={word + i} onClick={() => onClick(word)}>
             {word}
           </Button>

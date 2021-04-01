@@ -58,7 +58,11 @@ export default function GameHandler() {
           highScore={highScore}
           maxScore={words.length}
         />
-        <GamePlay words={words} handleSelection={handleSelection} />
+        <GamePlay
+          words={words}
+          clickedWords={clickedWords}
+          handleSelection={handleSelection}
+        />
       </div>
     );
   };
