@@ -7,6 +7,10 @@ import GameHandler from "./components/GameHandler";
 const clearLocalStorage = () => {
   console.log("localStorage cleared!");
   localStorage.clear();
+
+  // hacky, but, alas, idga hoot
+  // eslint-disable-next-line no-restricted-globals
+  location.reload();
 };
 
 export default function App() {
@@ -14,10 +18,20 @@ export default function App() {
     <div className="App">
       <header>
         <span>Memory Test</span>
-        <div className="gh-icon-placeholder" onClick={clearLocalStorage}></div>
+        <button className="gh-icon-placeholder" onClick={clearLocalStorage}>
+          mc
+        </button>
       </header>
       <GameHandler />
-      <footer>created by isaiahaiasi w/ :heart:</footer>
+      <footer>
+        <a
+          href="https://github.com/isaiahaiasi/memory-card"
+          target="_blank"
+          rel="noreferrer"
+        >
+          created by isaiahaiasi w/ :heart:
+        </a>
+      </footer>
     </div>
   );
 }

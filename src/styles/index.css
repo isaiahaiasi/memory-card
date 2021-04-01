@@ -70,11 +70,33 @@ footer {
   box-shadow: var(--shadow-wide);
 }
 
+footer a {
+  text-decoration: none;
+  color: var(--col-light-0);
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
 .gh-icon-placeholder {
   height: 2rem;
   width: 2rem;
+  border: none;
   border-radius: 50%;
-  background: white;
+  background: var(--col-light-0);
+  color: var(--col-dark-2);
+  text-align: center;
+  padding: 0 0 0.1rem 0;
+  overflow: hidden;
+  font-size: 1.4rem;
+  font-family: "Fira Code", monospace;
+  cursor: pointer;
+}
+
+.gh-icon-placeholder:hover {
+  background: rgb(250, 50, 50);
+  color: var(--col-light-0);
 }
 
 .btn {
