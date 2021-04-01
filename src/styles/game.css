@@ -5,6 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 3rem 1rem;
 }
 
 .game-active {
@@ -45,20 +46,32 @@
 }
 
 .game-over {
+  /* box-sizing: border-box; */
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   width: 100%;
-  padding: 2rem;
-  margin: 3rem 0;
+  max-width: 40rem;
+  font-size: 1.2rem;
+  text-align: center;
+  overflow-y: none;
+  /* height: 100%; */
+}
+
+.game-over__word-list-spacer {
+  box-sizing: border-box;
+  border: 2px solid white;
+  border-radius: 15px;
+  width: 100%;
+  margin: 1rem 0;
 }
 
 .game-over__word-list {
-  box-sizing: border-box;
-  max-height: 40vh;
+  max-height: 35vh;
   overflow-y: scroll;
-  border: 2px solid white;
-  border-radius: 15px;
-  padding: 0.3rem;
-  padding-left: 3rem;
+  padding-left: 3em;
+  margin: 0.5rem 0;
+  font-size: 1.3rem;
+  text-align: left;
 }

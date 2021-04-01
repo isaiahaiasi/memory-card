@@ -19,16 +19,18 @@ export default function EndView({
   return (
     <section className="game-over">
       <p>{gameOverMsg}</p>
-      <p>
+      <p style={{ fontSize: "4rem" }}>
         {score}/{maxScore}
       </p>
       <p>Highscore: {highScore}</p>
-      <p>You clicked on these words:</p>
-      <ol className="game-over__word-list">
-        {clickedWords.map((word) => (
-          <li key={word}>{word}</li>
-        ))}
-      </ol>
+      <p style={{ fontSize: "1rem" }}>You clicked on these words:</p>
+      <div className="game-over__word-list-spacer">
+        <ol className="game-over__word-list">
+          {clickedWords.map((word) => (
+            <li key={word}>{word}</li>
+          ))}
+        </ol>
+      </div>
       <Button onClick={restart}>Play Again?</Button>
       <Button onClick={goHome}>Go to homepage</Button>
     </section>
